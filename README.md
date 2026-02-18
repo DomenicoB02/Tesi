@@ -8,7 +8,7 @@ Creazione ambiente virtuale -> python -m venv venv
 Attivazione -> .\venv\Scripts\activate (Windows)
 
 3.
-Installazione di massa -> pip install -r requirements.txt
+Installazione di massa -> python -m pip install -r requirements.txt
 
 
 Oltre alle librerie Python, va installato Ollama in tutti e tre i modelli utilizzati per i test:
