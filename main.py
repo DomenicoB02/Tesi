@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from pydantic import BaseModel
 from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import PydanticOutputParser
+from langchain_core.output_parsers import StrOutputParser
 from codecarbon import EmissionsTracker
 
 load_dotenv()
@@ -14,32 +14,33 @@ class ResearchResponse(BaseModel):
     source: list[str]
     tools_used: list[str]
 
-llm = ChatOllama(model="llama3.1", temperature=0)
-parser = PydanticOutputParser(pydantic_object=ResearchResponse)
+llm = ChatOllama(model="llama3.1", temperature=1, max_tokens=1000)
+parser = StrOutputParser()
 
 prompt = ChatPromptTemplate.from_messages([
     ("system", (
-        "Sei un assistente tecnico. Rispondi SEMPRE in formato JSON.\n"
-        "Nel campo 'summary', usa il Markdown per creare una risposta ben strutturata.\n"
-        "Esempio di summary: '# Risultato: 210\\n\\n- **Passaggio 1**: ...'\n"
-        "Assicurati che tutto il testo sia contenuto in una singola stringa JSON valida.\n"
-        "{format_instructions}"
+            "Il tuo unico compito è ESEGUIRE la richiesta dell'utente.\n"
+            "Rispondi in modo strutturato e professionale in italiano."
     )),
     ("human", "{query}")
-]).partial(format_instructions=parser.get_format_instructions())
+])
 
 chain = prompt | llm | parser
 
+modello = "llama3.1"
+
 query = input("\nDomanda: ")
-tracker = EmissionsTracker(save_to_file=False)
+tracker = EmissionsTracker(
+    project_name=f"Test_{modello}", 
+    output_dir=".",
+    output_file="emissions.csv"
+)
 
 tracker.start()
 try:
     response = chain.invoke({"query": query})
     
-    print("\n" + "—"*40)
-    print(f"Risposta: {response.summary}")
-    print("—"*40)
+    print(f"\nRisposta:\n{response}")
 
 except Exception as e:
     # Se fallisce il JSON, mostriamo cosa ha detto l'IA per debug
