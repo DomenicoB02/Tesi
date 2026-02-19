@@ -23,8 +23,11 @@ I Modelli: ->
 								
     Heavy: ollama pull gemma2:27b
 
-Per usare CodeCarbon andare sul sito https://codecarbon.io/ 
+Per usare la dashboard di CodeCarbon andare sul sito https://codecarbon.io/ 
 
 Fare l'accesso, andare su project e creare un nuovo progetto e copiare il codice che viene fornito (andrà inserito nel main.py -> api_key="***" )
 
 A questo punto creare un nuovo esperimento e copiare il codice che verrà fornito ( andrà inserito sempre nel main.py -> experiment_id="***" )
+
+Altrimenti è possibile utilizzarlo come faccio io, salvando i file in maniera locale
+
