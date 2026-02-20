@@ -16,13 +16,11 @@ query_benchmark = (
 
 parser = StrOutputParser()
 
-# Loop
 for nome_modello in modelli_da_testare:
     print(f"\n" + "="*50)
     print(f"AVVIO TEST MODELLO: {nome_modello}")
     print("="*50)
     
-    # Inizializzazione modello specifico
     llm = ChatOllama(model=nome_modello, temperature=0.8, max_tokens=500)
     
     prompt = ChatPromptTemplate.from_messages([
@@ -32,7 +30,6 @@ for nome_modello in modelli_da_testare:
     
     chain = prompt | llm | parser
 
-    # Tracker configurato per distinguere i progetti nel CSV
     tracker = EmissionsTracker(
         project_name=f"Benchmark_{nome_modello.replace(':', '-')}", 
         output_dir=".",
@@ -56,8 +53,8 @@ for nome_modello in modelli_da_testare:
             print(f"\nRISULTATI {nome_modello}:")
             print(f"CO2: {dati.emissions * 1000:.4f}g | Tempo: {dati.duration:.2f}s | Watt GPU: {dati.gpu_power:.2f}W")
     
-    # Una piccola pausa per far raffreddare la GPU tra un test e l'altro
     print("\nFase di raffreddamento (5s)...")
     time.sleep(10)
+
 
 print("\nCOMPLIMENTI! Tutti i test sono stati completati e i dati sono nel file emissions.csv")
