@@ -1,3 +1,5 @@
+(TESTING È IL PROGRAMMA UTILIZZATO)
+
 # Tesi
 Se si dovesse far runnare il programma da zero, usare prima questi comandi:
 
