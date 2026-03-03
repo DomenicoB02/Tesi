@@ -6,8 +6,6 @@ from langchain_core.output_parsers import StrOutputParser
 from codecarbon import EmissionsTracker
 import time
 
-load_dotenv()
-
 modelli_da_testare = ["llama3.2", "llama3.1", "gemma2:27b"]
 
 query_benchmark = (
@@ -58,3 +56,4 @@ for nome_modello in modelli_da_testare:
 
 
 print("\nCOMPLIMENTI! Tutti i test sono stati completati e i dati sono nel file emissions.csv")
+
