@@ -105,10 +105,11 @@ for i, domanda in enumerate(domande, 1):
                 print(f"\n[METRICHE {nome_modello}]")
                 print(f"CO2: {dati.emissions * 1000:.4f}g | Tempo: {dati.duration:.2f}s | Energia: {dati.energy_consumed * 1000:.4f}Wh")
         
-        # Una piccola pausa per far raffreddare la GPU tra un test e l'altro
+        # Pausa per far raffreddare la GPU tra un test e l'altro
         print("\nFase di raffreddamento (5s)...")
         time.sleep(10)
 
     time.sleep(15)
 
 print("\nCOMPLIMENTI! Tutti i test sono stati completati e i dati sono nel file emissions.csv")
+
