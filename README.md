@@ -33,3 +33,6 @@ A questo punto creare un nuovo esperimento e copiare il codice che verrà fornit
 
 Altrimenti è possibile utilizzarlo come faccio io, salvando i file in maniera locale
 
+4.
+Esecuzione dello script -> python Testing/TestFinale.py
+
